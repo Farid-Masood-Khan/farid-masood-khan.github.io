@@ -1,0 +1,29 @@
+{
+  "title": "Muhammad Farid Masood Khan — AI/ML Portfolio",
+  "description": "AI/ML, NLP, and full-stack projects by Muhammad Farid Masood Khan. Offline, fast, and privacy-friendly portfolio with local admin.",
+  "ogImage": "/og/og-image.png",
+  "jsonLd": {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Muhammad Farid Masood Khan",
+    "description": "Computer Science graduate and Data Science intern focused on AI/ML, NLP, Flutter, and full-stack.",
+    "email": "mailto:faridmasood.khan@yahoo.com",
+    "url": "https://example.com",
+    "image": "https://example.com/og/og-image.png",
+    "jobTitle": "AI/ML Engineer & Full-Stack Developer",
+    "worksFor": {
+      "@type": "Organization",
+      "name": "Independent"
+    },
+    "sameAs": [
+      "https://github.com/Farid-Masood-Khan",
+      "https://www.linkedin.com/in/leishu/"
+    ],
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Sahiwal",
+      "addressRegion": "Punjab",
+      "addressCountry": "PK"
+    }
+  }
+}

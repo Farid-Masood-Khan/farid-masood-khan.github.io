@@ -1,0 +1,17 @@
+{
+  "name": "Farid — AI/ML Portfolio",
+  "short_name": "Farid Portfolio",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0a0a",
+  "theme_color": "#7c3aed",
+  "description": "Offline portfolio for Muhammad Farid Masood Khan",
+  "icons": [
+    {
+      "src": "/og/og-image.png",
+      "sizes": "1200x630",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

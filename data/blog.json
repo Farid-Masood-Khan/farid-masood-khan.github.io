@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "title": "Training a Lightweight Classifier",
+    "slug": "lightweight-classifier",
+    "date": "2025-01-15",
+    "tags": ["ml", "pytorch", "baseline"],
+    "summary": "A practical walk-through of a small image classifier that runs well on CPU.",
+    "bodyMarkdown": "# Why small models?\\n\\nFor edge devices and CPU-only hosts, small models are ideal.\\n\\n## Steps\\n1. Pick a tiny backbone\\n2. Data augments\\n3. Train with cosine LR\\n4. Quantize\\n\\n```python\\n# tiny training loop sketch\\nfor xb, yb in loader:\\n    loss = loss_fn(model(xb), yb)\\n    ...\\n```",
+    "published": true
+  },
+  {
+    "id": 2,
+    "title": "How I Built a Local-Only Portfolio (No APIs)",
+    "slug": "local-only-portfolio",
+    "date": "2025-02-04",
+    "tags": ["nextjs", "static-export", "a11y"],
+    "summary": "Notes on building a 100% offline Next.js site with local JSON + localStorage admin.",
+    "bodyMarkdown": "# Goals\\n- No external requests\\n- Works in airplane mode\\n\\n## Tips\\nUse App Router + `output: 'export'` and avoid server-only APIs.",
+    "published": true
+  },
+  {
+    "id": 3,
+    "title": "Deploying FastAPI + MySQL on Railway",
+    "slug": "fastapi-mysql-railway",
+    "date": "2025-03-12",
+    "tags": ["fastapi", "mysql", "devops"],
+    "summary": "A small checklist for getting FastAPI and MySQL live on Railway quickly.",
+    "bodyMarkdown": "1. Create Railway services\\n2. Set env vars\\n3. Run Alembic migrations\\n4. Add health checks",
+    "published": true
+  },
+  {
+    "id": 4,
+    "title": "GitHub Actions CI for Next.js Export",
+    "slug": "ci-next-export",
+    "date": "2025-04-02",
+    "tags": ["github-actions", "nextjs", "ci"],
+    "summary": "Simple CI that validates content, builds, and exports the static site.",
+    "bodyMarkdown": "```yaml\\nname: build\\non: [push]\\njobs:\\n  export:\\n    runs-on: ubuntu-latest\\n    steps:\\n      - uses: actions/checkout@v4\\n      - uses: actions/setup-node@v4\\n      - run: npm ci\\n      - run: npm run validate:content\\n      - run: npm run build && npx next export\\n```",
+    "published": true
+  },
+  {
+    "id": 5,
+    "title": "Prompt Notes for Small Vision Models",
+    "slug": "prompt-notes-small-vision",
+    "date": "2025-05-10",
+    "tags": ["vision", "prompting", "yolo"],
+    "summary": "Quick notes on curating prompts/labels for tiny detectors.",
+    "bodyMarkdown": "- Keep label space tight\\n- Use consistent crops\\n- Validate with ablations",
+    "published": false
+  },
+  {
+    "id": 6,
+    "title": "Optimizing DataLoaders in PyTorch",
+    "slug": "pytorch-dataloader-optimizations",
+    "date": "2025-06-18",
+    "tags": ["pytorch", "performance"],
+    "summary": "num_workers, pin_memory, prefetch_factor—what actually helps and when.",
+    "bodyMarkdown": "Try a grid over `num_workers` and measure end-to-end throughput; watch for CPU saturation.",
+    "published": true
+  }
+]

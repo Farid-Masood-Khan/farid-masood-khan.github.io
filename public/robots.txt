@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /admin/admin/123/rrr/poi/xx/admin
+Sitemap: /sitemap.xml

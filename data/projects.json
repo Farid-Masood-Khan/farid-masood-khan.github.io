@@ -1,0 +1,98 @@
+[
+  {
+    "id": 1,
+    "title": "Mini YOLO UAV",
+    "slug": "mini-yolo-uav",
+    "description": "Lightweight object detection on UAV footage with a tiny YOLO variant; tuned for CPU-only inference.",
+    "tags": ["computer-vision", "yolo", "uav", "edge-ai"],
+    "language": "Python",
+    "stars": 12,
+    "repoUrl": "https://github.com/Farid-Masood-Khan/mini-yolo-uav",
+    "demoUrl": "https://farid-masood-khan.github.io/mini-yolo-uav",
+    "readme": "# Mini YOLO UAV\\n\\nA compact object detector optimized for UAV video.\\n\\n## Features\\n- Tiny model, fast on CPU\\n- Simple dataset loader\\n- ONNX export\\n\\n## Quickstart\\n```bash\\npip install -r requirements.txt\\npython infer.py --video sample.mp4\\n```"
+  },
+  {
+    "id": 2,
+    "title": "THUCNews Linear SVM",
+    "slug": "thucnews-linear-svm",
+    "description": "Classic text classification baseline on THUCNews using TF-IDF + Linear SVM.",
+    "tags": ["nlp", "svm", "tfidf", "baseline"],
+    "language": "Python",
+    "stars": 18,
+    "repoUrl": "https://github.com/Farid-Masood-Khan/thucnews-linear-svm",
+    "demoUrl": "https://farid-masood-khan.github.io/thucnews-linear-svm",
+    "readme": "# THUCNews Linear SVM\\n\\nA clean, reproducible baseline.\\n\\n## Train\\n```bash\\npython train.py\\n```\\n## Eval\\n```bash\\npython eval.py\\n```"
+  },
+  {
+    "id": 3,
+    "title": "SDN/IoT Intrusion Baselines",
+    "slug": "sdn-iot-intrusion-baselines",
+    "description": "Reproducible baselines for intrusion detection on SDN/IoT datasets (classical ML + simple DL).",
+    "tags": ["security", "ids", "ml", "iot"],
+    "language": "Python",
+    "stars": 23,
+    "repoUrl": "https://github.com/Farid-Masood-Khan/sdn-iot-intrusion-baselines",
+    "demoUrl": "https://farid-masood-khan.github.io/sdn-iot-intrusion-baselines",
+    "readme": "# SDN/IoT Intrusion Baselines\\n\\nIncludes preprocessing, feature engineering, and baseline models."
+  },
+  {
+    "id": 4,
+    "title": "Flutter Expenses Tracker",
+    "slug": "flutter-expenses-tracker",
+    "description": "A polished Flutter app for personal expense tracking with charts and local persistence.",
+    "tags": ["flutter", "mobile", "charts"],
+    "language": "Dart",
+    "stars": 34,
+    "repoUrl": "https://github.com/Farid-Masood-Khan/flutter-expenses-tracker",
+    "demoUrl": "https://farid-masood-khan.github.io/flutter-expenses-tracker",
+    "readme": "# Flutter Expenses Tracker\\n\\nBeautiful charts, offline-first, theming support."
+  },
+  {
+    "id": 5,
+    "title": "React DataViz Dashboard",
+    "slug": "react-dataviz-dashboard",
+    "description": "A reusable dashboard template with cards, charts, and filters—built for quick analytics prototypes.",
+    "tags": ["react", "dashboard", "dataviz"],
+    "language": "TypeScript",
+    "stars": 17,
+    "repoUrl": "https://github.com/Farid-Masood-Khan/react-dataviz-dashboard",
+    "demoUrl": "https://farid-masood-khan.github.io/react-dataviz-dashboard",
+    "readme": "# React DataViz Dashboard\\n\\nPlug your data and ship dashboards fast."
+  },
+  {
+    "id": 6,
+    "title": "Fraud Detection ML Pipeline",
+    "slug": "fraud-detection-ml-pipeline",
+    "description": "End-to-end ML pipeline: preprocessing, model training, threshold tuning, and monitoring hooks.",
+    "tags": ["ml", "fraud", "pipeline"],
+    "language": "Python",
+    "stars": 29,
+    "repoUrl": "https://github.com/Farid-Masood-Khan/fraud-detection-ml-pipeline",
+    "demoUrl": "https://farid-masood-khan.github.io/fraud-detection-ml-pipeline",
+    "readme": "# Fraud Detection ML Pipeline\\n\\nIncludes ROC/PR curves, calibration, and drift checks."
+  },
+  {
+    "id": 7,
+    "title": "Arabic/Urdu OCR Lite",
+    "slug": "arabic-urdu-ocr-lite",
+    "description": "Lightweight OCR experiments for Arabic/Urdu scripts using CNN + CTC.",
+    "tags": ["ocr", "cv", "nlp"],
+    "language": "Python",
+    "stars": 9,
+    "repoUrl": "https://github.com/Farid-Masood-Khan/arabic-urdu-ocr-lite",
+    "demoUrl": "https://farid-masood-khan.github.io/arabic-urdu-ocr-lite",
+    "readme": "# Arabic/Urdu OCR Lite\\n\\nDataset helpers and small models for rapid iteration."
+  },
+  {
+    "id": 8,
+    "title": "This Portfolio (Offline)",
+    "slug": "portfolio-offline",
+    "description": "The exact static, offline-only portfolio you're viewing. JSON + localStorage admin.",
+    "tags": ["nextjs", "tailwind", "framer-motion"],
+    "language": "TypeScript",
+    "stars": 42,
+    "repoUrl": "https://github.com/Farid-Masood-Khan/portfolio-offline",
+    "demoUrl": "https://farid-masood-khan.github.io/portfolio-offline",
+    "readme": "# Portfolio (Offline)\\n\\nZero external APIs; fully static export."
+  }
+]

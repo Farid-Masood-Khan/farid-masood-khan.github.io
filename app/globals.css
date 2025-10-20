@@ -1,0 +1,82 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* System font stack, no external fonts */
+:root {
+  --bg: #0a0a0a;
+  --fg: #e5e7eb;
+  --muted: #9ca3af;
+  --card: rgba(255, 255, 255, 0.04);
+  --border: rgba(255, 255, 255, 0.08);
+  --glass: rgba(255, 255, 255, 0.06);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  color: var(--fg);
+  background: radial-gradient(1200px 600px at 10% -20%, rgba(124, 58, 237, 0.15), transparent),
+              radial-gradient(1000px 500px at 110% 10%, rgba(16, 185, 129, 0.12), transparent),
+              var(--bg);
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, Noto Sans, "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+a {
+  @apply underline underline-offset-2 decoration-neutral-700 hover:decoration-primary;
+}
+
+/* Glassmorphism helpers */
+.glass {
+  background: var(--glass);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--border);
+}
+
+.card {
+  @apply rounded-2xl border border-neutral-800 bg-neutral-900/60 backdrop-blur;
+}
+
+/* Focus outlines */
+:focus-visible {
+  outline: 2px solid theme('colors.primary');
+  outline-offset: 2px;
+}
+
+/* Skip to content */
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: 0;
+  background: #111827;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 8px;
+  z-index: 50;
+}
+.skip-link:focus {
+  left: 12px;
+}
+
+/* Lightweight markdown typography */
+.md-prose { line-height: 1.8; }
+.md-prose h1, .md-prose h2, .md-prose h3 { font-weight: 800; margin-top: 1.25rem; margin-bottom: .75rem; }
+.md-prose h1 { font-size: 1.875rem; }
+.md-prose h2 { font-size: 1.5rem; }
+.md-prose h3 { font-size: 1.25rem; }
+.md-prose p, .md-prose ul, .md-prose ol { margin: .75rem 0; }
+.md-prose ul, .md-prose ol { padding-left: 1.25rem; }
+.md-prose a { text-decoration: underline; }
+.md-prose pre { background: rgba(255,255,255,0.04); padding: .75rem; border-radius: .5rem; overflow:auto; }
+.md-prose code { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; }
+.md-prose blockquote { border-left: 3px solid rgba(255,255,255,.2); padding-left: .75rem; color: #9ca3af; }
+.md-prose img { max-width: 100%; height: auto; border-radius: .5rem; }
+.md-prose table { width: 100%; border-collapse: collapse; margin: .75rem 0; }
+.md-prose th, .md-prose td { border: 1px solid rgba(255,255,255,.1); padding: .5rem .625rem; }
+
+/* Simple container */
+.container {
+  @apply mx-auto max-w-6xl px-4;
+}
