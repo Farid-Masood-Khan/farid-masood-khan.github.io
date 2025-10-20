@@ -4,6 +4,7 @@ import siteMeta from '@/data/site-meta.json';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import HeadUpdater from '@/components/HeadUpdater';
+import ServiceWorkerRegister from '@/components/ServiceWorkerRegister';
 
 const baseUrl = (siteMeta as any).baseUrl || 'https://example.com';
 
@@ -57,6 +58,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className="dark">
       <head>
         <ThemeScript />
+        <meta name="theme-color" content="#7c3aed" />
+        <link rel="manifest" href="/manifest.webmanifest" />
         <link rel="alternate" type="application/rss+xml" href="/feed.xml" />
       </head>
       <body className="min-h-screen">
@@ -65,6 +68,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main id="content" className="container py-8">{children}</main>
         <Footer />
         <HeadUpdater />
+        <ServiceWorkerRegister />
       </body>
     </html>
   );

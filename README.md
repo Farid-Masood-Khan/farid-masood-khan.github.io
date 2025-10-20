@@ -9,6 +9,7 @@ Highlights:
 - Local Admin with CRUD + import/export, Zod validation and autosave
 - SEO-ready metadata + JSON-LD, `robots.txt`, generated `sitemap.xml`
 - RSS feed generated at `public/feed.xml` (linked in `<head>`)
+- Optional PWA: service worker + manifest for offline caching of core pages
 
 ## Quick start
 
@@ -47,6 +48,9 @@ Highlights:
 - public/
   - robots.txt
   - feed.xml (generated)
+  - manifest.webmanifest (PWA)
+  - sw.js (PWA service worker)
+  - offline.html (offline fallback page)
   - cv/README.txt (put `Farid_Masood_CV.pdf` here)
   - og/ (create `og-image.png` here)
 - scripts/

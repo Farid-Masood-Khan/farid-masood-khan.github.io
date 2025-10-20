@@ -6,7 +6,6 @@ import siteMetaSeed from '@/data/site-meta.json';
 import projectsSeed from '@/data/projects.json';
 import blogSeed from '@/data/blog.json';
 import { Blog, Projects } from '@/lib/schemas';
-import Head from 'next/head';
 
 type SiteMeta = typeof siteMetaSeed;
 
@@ -159,16 +158,11 @@ export default function AdminPage() {
     reader.readAsText(file);
   }
 
-  const headEls = (
-    <Head>
-      <meta name="robots" content="noindex, nofollow" />
-    </Head>
-  );
+  
 
   if (!session) {
     return (
       <section className="max-w-md mx-auto space-y-6">
-        {headEls}
         <h1 className="text-3xl font-extrabold">Admin</h1>
         <div className="rounded-xl border border-neutral-800 p-4">
           <p className="text-xs text-amber-400 mb-3">Demo only — not for production auth.</p>
@@ -192,7 +186,6 @@ export default function AdminPage() {
 
   return (
     <section className="space-y-6">
-      {headEls}
       <div className="flex items-center justify-between">
         <h1 className="text-3xl font-extrabold">Admin</h1>
         <div className="flex items-center gap-3">
