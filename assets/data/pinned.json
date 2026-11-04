@@ -1,42 +1,53 @@
 {
   "highlights": [
     {
-      "title": "Portfolio (this site)",
-      "desc": "Accessible, fast, responsive; GitHub repos, filters, and caching.",
-      "url": "https://github.com/Farid-Masood-Khan",
-      "icon": "github"
+      "title": "mlforge-mlops",
+      "desc": "Production credit risk continuous delivery: Feast feature store, DVC pipelines, MLflow model registry, and automated KS/PSI distribution drift monitoring.",
+      "url": "https://github.com/Farid-Masood-Khan/mlforge-mlops",
+      "icon": "python",
+      "tag": "MLOps",
+      "tests": "26 Tests Passing"
     },
     {
-      "title": "IoT-IDS baselines",
-      "desc": "Tabular ML baselines for intrusion detection with reproducible pipelines.",
-      "url": "https://github.com/Farid-Masood-Khan",
-      "icon": "python"
+      "title": "documind-rag",
+      "desc": "Enterprise document RAG chatbot: sentence-window chunking, hybrid dense + BM25 Okapi retrieval, Reciprocal Rank Fusion (RRF), cross-encoder reranking, and citation verification.",
+      "url": "https://github.com/Farid-Masood-Khan/documind-rag",
+      "icon": "python",
+      "tag": "GenAI & RAG",
+      "tests": "12 Tests Passing"
     },
     {
-      "title": "THUCNews Linear SVM",
-      "desc": "TF‑IDF + Linear SVM baseline with concise metrics.",
-      "url": "https://github.com/Farid-Masood-Khan",
-      "icon": "python"
+      "title": "cropguard-agri-ai",
+      "desc": "Edge Agri-AI crop disease classifier (38 PlantVillage classes): ONNX Runtime quantization (16.1 MB, 2.1 ms), temperature scaling ECE calibration (0.0257), and Laplacian blur gate.",
+      "url": "https://github.com/Farid-Masood-Khan/cropguard-agri-ai",
+      "icon": "python",
+      "tag": "Computer Vision",
+      "tests": "17 Tests Passing"
+    },
+    {
+      "title": "urdunlp-toolkit",
+      "desc": "Low-resource NLP toolkit for Urdu and Roman Urdu: multi-stage normalization (-15.26% vocabulary reduction), Jaccard anti-leakage splitting, and calibrated sentiment triage.",
+      "url": "https://github.com/Farid-Masood-Khan/urdunlp-toolkit",
+      "icon": "python",
+      "tag": "NLP",
+      "tests": "18 Tests Passing"
+    },
+    {
+      "title": "trendcast-forecasting",
+      "desc": "Pakistan food commodity time-series forecasting: real WFP price series (2004–2026), rolling-origin backtesting, calibrated residual prediction intervals (81.8% PICP), and baseline comparison gate.",
+      "url": "https://github.com/Farid-Masood-Khan/trendcast-forecasting",
+      "icon": "python",
+      "tag": "Time Series",
+      "tests": "18 Tests Passing"
+    },
+    {
+      "title": "Frugal-ML-Extension",
+      "desc": "Food demand forecasting regressor and shelf-life spoilage hazard classifier microservice for the Frugal sustainable food distribution platform.",
+      "url": "https://github.com/Farid-Masood-Khan/Frugal-ML-Extension",
+      "icon": "python",
+      "tag": "Sustainable AI",
+      "tests": "Verified Suite"
     }
   ],
-  "apps": [
-    {
-      "title": "Flutter Portfolio App",
-      "desc": "Clean theming and modular widgets.",
-      "url": "https://github.com/Farid-Masood-Khan",
-      "icon": "flutter"
-    },
-    {
-      "title": "Flutter + Firebase Starter",
-      "desc": "Auth, Firestore, and CI for prototyping.",
-      "url": "https://github.com/Farid-Masood-Khan",
-      "icon": "flutter"
-    },
-    {
-      "title": "Flutter UI Kit",
-      "desc": "Reusable widgets and animations.",
-      "url": "https://github.com/Farid-Masood-Khan",
-      "icon": "flutter"
-    }
-  ]
+  "apps": []
 }

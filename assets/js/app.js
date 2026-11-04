@@ -13,7 +13,7 @@
     root.setAttribute('data-theme', theme);
     toggleBtn?.setAttribute('aria-pressed', theme === 'light' ? 'true' : 'false');
     localStorage.setItem('theme', theme);
-    const themeColor = theme === 'light' ? '#f7f9fc' : '#0d1117';
+    const themeColor = theme === 'light' ? '#f8fafc' : '#070a0f';
     const metaTheme = document.querySelector('meta[name="theme-color"]');
     if (metaTheme) metaTheme.setAttribute('content', themeColor);
   }
@@ -23,7 +23,18 @@
     setTheme(next);
   });
 
-  // Ensure CV link works (fallback to mailto if file missing) — only on http(s)
+  // Top Scroll Progress Bar
+  const progressBar = document.querySelector('.scroll-progress');
+  function updateScrollProgress() {
+    if (!progressBar) return;
+    const scrollTop = window.scrollY || document.documentElement.scrollTop;
+    const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const progress = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+    progressBar.style.width = progress + '%';
+  }
+  window.addEventListener('scroll', updateScrollProgress, { passive: true });
+
+  // CV Link handler
   const cvLink = document.getElementById('cv-link');
   if (cvLink && /^https?:$/.test(location.protocol)) {
     const href = cvLink.getAttribute('href') || '';
@@ -38,19 +49,14 @@
           cvLink.removeAttribute('download');
           cvLink.textContent = 'Request CV';
         });
-    } catch {
-      const mail = 'mailto:faridmasoodofficial@gmail.com?subject=' + encodeURIComponent('Request CV');
-      cvLink.setAttribute('href', mail);
-      cvLink.removeAttribute('download');
-      cvLink.textContent = 'Request CV';
-    }
+    } catch {}
   }
 
-  // Footer year only
+  // Footer Year
   const copyrightYearEl = document.getElementById('copyright-year');
   if (copyrightYearEl) copyrightYearEl.textContent = new Date().getFullYear();
 
-  // Nav active highlighting
+  // Nav active link highlighting
   const navLinks = Array.from(document.querySelectorAll('.nav-link'));
   function setActive(hash) {
     navLinks.forEach(link => {
@@ -60,7 +66,7 @@
       else link.removeAttribute('aria-current');
     });
   }
-  setActive('#overview');
+
   const sections = navLinks
     .map(l => {
       const sel = l.getAttribute('href');
@@ -77,7 +83,7 @@
           setActive(id);
         }
       });
-    }, { threshold: 0.5, rootMargin: '0px 0px -40% 0px' });
+    }, { threshold: 0.35, rootMargin: '0px 0px -30% 0px' });
     sections.forEach(s => io.observe(s.el));
 
     // Reveal animations
@@ -89,12 +95,12 @@
             e.target.classList.add('in-view');
           }
         });
-      }, { threshold: 0.12, rootMargin: '0px 0px -10% 0px' });
+      }, { threshold: 0.1, rootMargin: '0px 0px -5% 0px' });
       revealEls.forEach(el => ro.observe(el));
     }
   }
 
-  // Mobile navigation (hamburger)
+  // Mobile navigation hamburger
   const menuBtn = document.getElementById('menu-toggle');
   const navListEl = document.getElementById('primary-nav');
   const navBackdrop = document.getElementById('nav-backdrop');
@@ -125,26 +131,18 @@
     if (a) setMenu(false);
   });
 
-  // Ensure menu state is correct when switching between mobile/desktop
   const mql = window.matchMedia('(max-width: 760px)');
   function handleViewportChange(e) {
-    if (!e.matches) {
-      // Leaving mobile -> desktop: force close overlay
-      setMenu(false);
-    }
+    if (!e.matches) setMenu(false);
   }
   if (mql.addEventListener) mql.addEventListener('change', handleViewportChange);
   else if (mql.addListener) mql.addListener(handleViewportChange);
-  // Initialize state
-  handleViewportChange(mql);
-
-  
 
   // Back to top
   const backTop = document.getElementById('back-to-top');
   window.addEventListener('scroll', () => {
     if (!backTop) return;
-    const show = (window.scrollY || 0) > 240;
+    const show = (window.scrollY || 0) > 300;
     backTop.classList.toggle('show', show);
   }, { passive: true });
 
@@ -152,7 +150,113 @@
     window.scrollTo({ top: 0, behavior: motionOK ? 'smooth' : 'auto' });
   });
 
-  // Contact form
+  // Spotlight mouse effect on system cards
+  if (motionOK) {
+    document.querySelectorAll('.system-card').forEach(card => {
+      card.addEventListener('mousemove', e => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        card.style.setProperty('--mouse-x', `${x}px`);
+        card.style.setProperty('--mouse-y', `${y}px`);
+      });
+    });
+  }
+
+  // Neural Network / Particle Mesh Canvas Animation
+  const canvas = document.getElementById('particle-canvas');
+  if (canvas && motionOK) {
+    const ctx = canvas.getContext('2d');
+    let width = (canvas.width = canvas.offsetWidth);
+    let height = (canvas.height = canvas.offsetHeight);
+
+    window.addEventListener('resize', () => {
+      width = canvas.width = canvas.offsetWidth;
+      height = canvas.height = canvas.offsetHeight;
+    });
+
+    const particles = [];
+    const count = Math.min(Math.floor((width * height) / 14000), 65);
+
+    let mouse = { x: null, y: null };
+    window.addEventListener('mousemove', (e) => {
+      const rect = canvas.getBoundingClientRect();
+      if (e.clientY <= rect.bottom && e.clientY >= rect.top) {
+        mouse.x = e.clientX - rect.left;
+        mouse.y = e.clientY - rect.top;
+      } else {
+        mouse.x = null;
+        mouse.y = null;
+      }
+    });
+
+    for (let i = 0; i < count; i++) {
+      particles.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        vx: (Math.random() - 0.5) * 0.7,
+        vy: (Math.random() - 0.5) * 0.7,
+        radius: Math.random() * 2 + 1
+      });
+    }
+
+    function renderParticles() {
+      ctx.clearRect(0, 0, width, height);
+
+      const isLight = root.getAttribute('data-theme') === 'light';
+      const nodeColor = isLight ? 'rgba(2, 132, 199, 0.45)' : 'rgba(69, 202, 255, 0.55)';
+      const edgeColor = isLight ? 'rgba(2, 132, 199,' : 'rgba(69, 202, 255,';
+
+      for (let i = 0; i < particles.length; i++) {
+        const p = particles[i];
+        p.x += p.vx;
+        p.y += p.vy;
+
+        if (p.x < 0 || p.x > width) p.vx *= -1;
+        if (p.y < 0 || p.y > height) p.vy *= -1;
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fillStyle = nodeColor;
+        ctx.fill();
+
+        for (let j = i + 1; j < particles.length; j++) {
+          const p2 = particles[j];
+          const dx = p.x - p2.x;
+          const dy = p.y - p2.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+
+          if (dist < 110) {
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(p2.x, p2.y);
+            ctx.strokeStyle = `${edgeColor} ${1 - dist / 110 * 0.9})`;
+            ctx.lineWidth = 0.75;
+            ctx.stroke();
+          }
+        }
+
+        if (mouse.x !== null && mouse.y !== null) {
+          const mdx = p.x - mouse.x;
+          const mdy = p.y - mouse.y;
+          const mdist = Math.sqrt(mdx * mdx + mdy * mdy);
+          if (mdist < 140) {
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(mouse.x, mouse.y);
+            ctx.strokeStyle = `${edgeColor} ${0.85 - mdist / 140 * 0.8})`;
+            ctx.lineWidth = 1;
+            ctx.stroke();
+          }
+        }
+      }
+
+      requestAnimationFrame(renderParticles);
+    }
+    renderParticles();
+  }
+
+  // Contact form & WeChat
   const form = document.getElementById('contact-form');
   const contactStatus = document.getElementById('contact-status');
   const copyWechatBtn = document.getElementById('copy-wechat');
@@ -169,11 +273,11 @@
       '',
       message,
       '',
-      '— Sent from your portfolio contact form'
+      '— Sent via farid-masood-khan.github.io'
     ];
     const body = encodeURIComponent(bodyLines.join('\n'));
     const mailto = `mailto:${email}?subject=${encodeURIComponent(subject || 'Portfolio inquiry')}&body=${body}`;
-    contactStatus.textContent = 'Opening mail client...';
+    if (contactStatus) contactStatus.textContent = 'Opening mail client...';
     window.location.href = mailto;
   });
 
@@ -181,255 +285,161 @@
     const text = wechatEl?.textContent || 'faridmasood1';
     try {
       await navigator.clipboard.writeText(text);
-      contactStatus.textContent = 'WeChat ID copied.';
+      if (contactStatus) contactStatus.textContent = 'WeChat ID copied to clipboard!';
     } catch {
-      contactStatus.textContent = 'Copy failed. ID: ' + text;
+      if (contactStatus) contactStatus.textContent = 'Copy failed. ID: ' + text;
     }
   });
 
-  // WeChat QR toggle
   const showQRBtn = document.getElementById('show-wechat-qr');
   const qrPanel = document.getElementById('wechat-qr-panel');
   const qrImg = document.getElementById('wechat-qr-img');
   const closeQRBtn = document.getElementById('close-wechat-qr');
 
-  function ensureQrFallback() {
-    if (!qrPanel) return;
-    const inner = qrPanel.querySelector('.qr-inner');
-    if (!inner) return;
-    if (!inner.querySelector('.qr-msg')) {
-      const p = document.createElement('p');
-      p.className = 'qr-msg';
-      const idText = wechatEl?.textContent || 'faridmasood1';
-      p.textContent = 'QR not available. Add assets/img/wechat_qr.png or use WeChat ID: ' + idText;
-      p.style.color = 'var(--muted)';
-      p.style.textAlign = 'center';
-      inner.appendChild(p);
-    }
-  }
-
-  qrImg?.addEventListener('error', ensureQrFallback);
-
   showQRBtn?.addEventListener('click', () => {
     qrPanel?.removeAttribute('hidden');
     qrPanel?.setAttribute('aria-hidden', 'false');
-    if (!qrImg || !qrImg.complete) {
-      // If image missing or not loaded, set fallback message
-      ensureQrFallback();
-    }
   });
   closeQRBtn?.addEventListener('click', () => {
     qrPanel?.setAttribute('hidden', '');
     qrPanel?.setAttribute('aria-hidden', 'true');
   });
 
-  // Fetch GitHub repos with caching, filters, sort
+  // Repositories Browser & GitHub API
   const grid = document.getElementById('repo-grid');
-  const status = document.getElementById('repo-status');
-  const fallback = document.getElementById('repo-fallback');
   const filtersEl = document.getElementById('repo-filters');
   const sortEl = document.getElementById('repo-sort');
 
   let allRepos = [];
-  let currentLang = 'All';
+  let currentFilter = 'All';
   let currentSort = 'updated';
-  const cacheKey = 'repos_cache_v1';
-  const cacheTTL = 1000 * 60 * 5; // 5 minutes
+  const cacheKey = 'fmk_repos_cache_v2';
+  const cacheTTL = 1000 * 60 * 10; // 10 minutes
 
-  function loadRepos() {
+  async function loadRepos() {
     try {
       const cached = JSON.parse(localStorage.getItem(cacheKey) || 'null');
       if (cached && (Date.now() - cached.time) < cacheTTL && Array.isArray(cached.data)) {
-        allRepos = cached.data.filter(r => !r.fork);
+        allRepos = cached.data.filter(r => !r.fork && r.name !== 'Farid-Masood-Khan' && r.name !== 'farid-masood-khan.github.io');
         buildControls();
         applyRepoView();
-        status.textContent = 'Loaded repositories from cache.';
-        grid?.setAttribute('aria-busy', 'false');
-        grid?.setAttribute('data-loading', 'false');
+        return;
+      }
+
+      const res = await fetch('https://api.github.com/users/Farid-Masood-Khan/repos?sort=pushed&per_page=30');
+      if (!res.ok) throw new Error('GitHub API rate limited or unreachable');
+      const data = await res.json();
+      localStorage.setItem(cacheKey, JSON.stringify({ time: Date.now(), data }));
+      allRepos = data.filter(r => !r.fork && r.name !== 'Farid-Masood-Khan' && r.name !== 'farid-masood-khan.github.io');
+      buildControls();
+      applyRepoView();
+    } catch (err) {
+      loadFallbackPinned();
+    }
+  }
+
+  async function loadFallbackPinned() {
+    try {
+      const res = await fetch('assets/data/pinned.json');
+      if (res.ok) {
+        const data = await res.json();
+        allRepos = (data.highlights || []).map(h => ({
+          name: h.title,
+          description: h.desc,
+          html_url: h.url,
+          language: 'Python',
+          stargazers_count: 0,
+          pushed_at: new Date().toISOString()
+        }));
+        buildControls();
+        applyRepoView();
         return;
       }
     } catch {}
-    fetchRepos();
-  }
-
-  async function fetchRepos() {
-    const endpoint = 'https://api.github.com/users/Farid-Masood-Khan/repos';
-    const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 7000);
-    try {
-      const res = await fetch(endpoint, {
-        signal: controller.signal,
-        headers: { 'Accept': 'application/vnd.github+json' },
-        cache: 'no-store'
-      });
-      clearTimeout(timeout);
-      if (!res.ok) throw new Error(`Status ${res.status}`);
-      const data = await res.json();
-      allRepos = (Array.isArray(data) ? data : []).filter(r => !r.fork);
-      localStorage.setItem(cacheKey, JSON.stringify({ time: Date.now(), data }));
-      buildControls();
-      applyRepoView();
-      status.textContent = 'Loaded latest repositories.';
-    } catch (err) {
-      renderFallback();
-      status.textContent = 'Showing fallback due to network limits.';
-    } finally {
-      grid?.setAttribute('aria-busy', 'false');
-      grid?.setAttribute('data-loading', 'false');
-    }
   }
 
   function buildControls() {
-    // Render language filters
-    if (filtersEl) {
-      filtersEl.innerHTML = '';
-      const langs = Array.from(new Set(allRepos.map(r => r.language).filter(Boolean)));
-      const allChip = document.createElement('button');
-      allChip.type = 'button';
-      allChip.className = 'chip';
-      allChip.textContent = 'All';
-      allChip.setAttribute('aria-selected', String(currentLang === 'All'));
-      allChip.addEventListener('click', () => {
-        currentLang = 'All';
-        updateFilterSelection('All');
+    if (!filtersEl) return;
+    const filterOptions = ['All', 'MLOps', 'GenAI / RAG', 'Computer Vision', 'NLP', 'Time Series'];
+    filtersEl.innerHTML = '';
+    filterOptions.forEach(opt => {
+      const chip = document.createElement('button');
+      chip.className = 'chip';
+      chip.textContent = opt;
+      chip.setAttribute('aria-selected', opt === currentFilter ? 'true' : 'false');
+      chip.addEventListener('click', () => {
+        currentFilter = opt;
+        Array.from(filtersEl.children).forEach(c => c.setAttribute('aria-selected', 'false'));
+        chip.setAttribute('aria-selected', 'true');
         applyRepoView();
       });
-      filtersEl.appendChild(allChip);
+      filtersEl.appendChild(chip);
+    });
 
-      langs.sort((a, b) => a.localeCompare(b)).forEach(l => {
-        const chip = document.createElement('button');
-        chip.type = 'button';
-        chip.className = 'chip';
-        chip.textContent = l;
-        chip.setAttribute('aria-selected', String(currentLang === l));
-        chip.addEventListener('click', () => {
-          currentLang = l;
-          updateFilterSelection(l);
+    if (sortEl) {
+      sortEl.querySelectorAll('button').forEach(btn => {
+        btn.addEventListener('click', () => {
+          sortEl.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', 'false'));
+          btn.setAttribute('aria-pressed', 'true');
+          currentSort = btn.getAttribute('data-sort') || 'updated';
           applyRepoView();
         });
-        filtersEl.appendChild(chip);
       });
     }
-    // Sort controls
-    sortEl?.querySelectorAll('button[data-sort]').forEach(btn => {
-      const val = btn.getAttribute('data-sort');
-      btn.setAttribute('aria-pressed', String(val === currentSort));
-      btn.addEventListener('click', () => {
-        currentSort = val || 'updated';
-        sortEl.querySelectorAll('button[data-sort]').forEach(b => b.setAttribute('aria-pressed', String(b === btn)));
-        applyRepoView();
+  }
+
+  function applyRepoView() {
+    if (!grid) return;
+    let list = [...allRepos];
+
+    if (currentFilter !== 'All') {
+      const term = currentFilter.toLowerCase();
+      list = list.filter(r => {
+        const full = `${r.name} ${r.description || ''} ${(r.topics || []).join(' ')}`.toLowerCase();
+        if (term.includes('mlops')) return full.includes('mlops') || full.includes('feast') || full.includes('dvc');
+        if (term.includes('rag')) return full.includes('rag') || full.includes('retrieval') || full.includes('bm25');
+        if (term.includes('vision')) return full.includes('crop') || full.includes('vision') || full.includes('onnx');
+        if (term.includes('nlp')) return full.includes('urdu') || full.includes('nlp') || full.includes('text');
+        if (term.includes('time series')) return full.includes('trend') || full.includes('forecasting') || full.includes('time-series');
+        return full.includes(term);
       });
-    });
-  }
-
-  function updateFilterSelection(value) {
-    filtersEl?.querySelectorAll('.chip').forEach(c => {
-      c.setAttribute('aria-selected', String(c.textContent === value));
-    });
-  }
-
-  async function applyRepoView() {
-    let list = allRepos.slice();
-    if (currentLang !== 'All') {
-      list = list.filter(r => (r.language || '—') === currentLang);
     }
-    list = sortRepos(list);
-    if (!list.length) {
-      await renderPinnedReposFromJson();
-      status.textContent = 'Showing featured repositories.';
-      return;
-    }
-    renderRepos(list.slice(0, 6));
-    const count = Math.min(6, list.length);
-    status.textContent = `Showing ${count} repositories · Sort: ${currentSort} · Filter: ${currentLang}`;
-  }
 
-  function sortRepos(list) {
-    return list.sort((a, b) => {
+    list.sort((a, b) => {
       if (currentSort === 'stars') {
         return (b.stargazers_count ?? 0) - (a.stargazers_count ?? 0);
       }
       return new Date(b.pushed_at) - new Date(a.pushed_at);
     });
+
+    renderRepos(list);
   }
 
   function renderRepos(repos) {
     if (!grid) return;
     grid.innerHTML = '';
-    for (const r of repos) {
-      const card = document.createElement('article');
-      card.className = 'card';
-      const desc = r.description || 'No description provided.';
-      const stars = r.stargazers_count ?? 0;
-      const lang = r.language || '—';
+    if (repos.length === 0) {
+      grid.innerHTML = '<p style="color:var(--muted);grid-column:1/-1;">No repositories found matching this filter.</p>';
+      return;
+    }
 
+    repos.forEach(r => {
+      const card = document.createElement('article');
+      card.className = 'card reveal in-view';
       card.innerHTML = `
         <div class="title">${escapeHTML(r.name)}</div>
-        <div class="desc">${escapeHTML(desc)}</div>
+        <div class="desc">${escapeHTML(r.description || 'Production machine learning repository.')}</div>
         <div class="meta">
-          <span title="Primary language">${escapeHTML(lang)}</span>
-          <span aria-label="Stars">${starSVG()} ${stars}</span>
-          <span title="Updated">${new Date(r.pushed_at).toLocaleDateString()}</span>
+          <span>🐍 ${escapeHTML(r.language || 'Python')}</span>
+          <span>⭐ ${r.stargazers_count ?? 0}</span>
+          <span>📅 ${new Date(r.pushed_at).toLocaleDateString()}</span>
         </div>
         <div class="actions">
-          <a class="btn ghost" href="${r.html_url}" target="_blank" rel="noopener">View Repo</a>
+          <a class="btn small ghost" href="${r.html_url}" target="_blank" rel="noopener">View Repository →</a>
         </div>
       `;
       grid.appendChild(card);
-    }
-  }
-
-  async function renderPinnedReposFromJson() {
-    if (!grid) return;
-    try {
-      const res = await fetch('assets/data/pinned.json', { cache: 'no-store' });
-      if (res.ok) {
-        const data = await res.json();
-        const combined = [...(data.highlights || []), ...(data.apps || [])];
-        const repos = combined.slice(0, 6).map(it => ({
-          name: it.title || 'Project',
-          description: it.desc || '',
-          language: it.icon === 'flutter' ? 'Dart' : 'Python',
-          html_url: it.url || 'https://github.com/Farid-Masood-Khan',
-          stargazers_count: 0,
-          pushed_at: new Date().toISOString(),
-          fork: false
-        }));
-        renderRepos(repos);
-        return;
-      }
-    } catch {}
-    // fallback to static basic list
-    renderFallback();
-  }
-
-  function renderFallback() {
-    fallback?.removeAttribute('hidden');
-    if (!grid) return;
-    const fallbackRepos = [
-      {
-        name: 'IoT-IDS-baselines',
-        description: 'Baseline models for intrusion detection on IoT/SDN datasets.',
-        language: 'Python',
-        html_url: 'https://github.com/Farid-Masood-Khan'
-      },
-      {
-        name: 'THUCNews-LinearSVM',
-        description: 'Classic text classification with TF-IDF and Linear SVM.',
-        language: 'Python',
-        html_url: 'https://github.com/Farid-Masood-Khan'
-      },
-      {
-        name: 'tiny-YOLO-UAV',
-        description: 'Experiments with small YOLO models on limited UAV imagery.',
-        language: 'Python',
-        html_url: 'https://github.com/Farid-Masood-Khan'
-      }
-    ];
-    allRepos = fallbackRepos.map(r => ({ ...r, stargazers_count: 0, pushed_at: new Date().toISOString(), fork: false }));
-    buildControls();
-    // directly render without applying filters to ensure we show content even if filters empty
-    renderRepos(allRepos.slice(0, 6));
+    });
   }
 
   function escapeHTML(s) {
@@ -438,75 +448,5 @@
     })[c]);
   }
 
-  function starSVG() {
-    return '<svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M11.998 3.5 9.41 9.14l-6.16.49 4.665 3.87-1.42 5.97 5.503-3.36 5.503 3.36-1.42-5.97 4.665-3.87-6.16-.49L11.998 3.5z"/></svg>';
-  }
-
-  // Pinned Highlights & Apps
-  const highlightsGrid = document.getElementById('highlights-grid');
-  const appsGrid = document.getElementById('apps-grid');
-
-  async function loadPinned() {
-    try {
-      const res = await fetch('assets/data/pinned.json', { cache: 'no-store' });
-      if (!res.ok) throw new Error('pinned.json missing');
-      const data = await res.json();
-      renderPinned(data.highlights || [], highlightsGrid);
-      renderPinned(data.apps || [], appsGrid);
-    } catch {
-      const defaults = {
-        highlights: [
-          { title: 'Portfolio (this site)', desc: 'Accessible, fast, responsive.', url: 'https://github.com/Farid-Masood-Khan', icon: 'github' },
-          { title: 'IoT-IDS baselines', desc: 'Tabular ML baselines & pipelines.', url: 'https://github.com/Farid-Masood-Khan', icon: 'python' },
-          { title: 'THUCNews Linear SVM', desc: 'TF‑IDF + Linear SVM baseline.', url: 'https://github.com/Farid-Masood-Khan', icon: 'python' }
-        ],
-        apps: [
-          { title: 'Flutter Portfolio App', desc: 'Theming & modular widgets.', url: 'https://github.com/Farid-Masood-Khan', icon: 'flutter' },
-          { title: 'Flutter + Firebase Starter', desc: 'Auth, Firestore, CI.', url: 'https://github.com/Farid-Masood-Khan', icon: 'flutter' },
-          { title: 'Flutter UI Kit', desc: 'Reusable widgets & animations.', url: 'https://github.com/Farid-Masood-Khan', icon: 'flutter' }
-        ]
-      };
-      renderPinned(defaults.highlights, highlightsGrid);
-      renderPinned(defaults.apps, appsGrid);
-    }
-  }
-
-  function renderPinned(list, container) {
-    if (!container) return;
-    container.innerHTML = '';
-    list.forEach(item => {
-      const card = document.createElement('article');
-      card.className = 'card reveal';
-      card.innerHTML = `
-        <div class="title">${pinnedIconSVG(item.icon || 'github')}${escapeHTML(item.title)}</div>
-        <div class="desc">${escapeHTML(item.desc || '')}</div>
-        <div class="actions">
-          <a class="btn ghost" href="${item.url}" target="_blank" rel="noopener">View Repo</a>
-        </div>
-      `;
-      container.appendChild(card);
-      if (motionOK) requestAnimationFrame(() => card.classList.add('in-view'));
-    });
-  }
-
-  
-
-  function pinnedIconSVG(name) {
-    // minimal icons inline
-    if (name === 'github') {
-      return '<svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" style="margin-right:6px;"><path fill="currentColor" d="M12 .5a12 12 0 0 0-3.79 23.4c.6.11.82-.26.82-.58v-2.02c-3.34.73-4.04-1.61-4.04-1.61-.55-1.38-1.35-1.75-1.35-1.75-1.1-.75.08-.73.08-.73 1.21.09 1.85 1.25 1.85 1.25 1.08 1.85 2.82 1.32 3.51 1.01.11-.79.42-1.32.76-1.63-2.66-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.39 1.25-3.24-.13-.3-.54-1.52.12-3.17 0 0 1-.32 3.28 1.24a11.4 11.4 0 0 1 5.97 0c2.28-1.56 3.28-1.24 3.28-1.24.66 1.65.25 2.87.12 3.17.78.85 1.25 1.93 1.25 3.24 0 4.61-2.82 5.62-5.5 5.92.43.37.82 1.1.82 2.22v3.29c0 .32.21.7.82.58A12 12 0 0 0 12 .5Z"/></svg>';
-    }
-    if (name === 'python') {
-      return '<span class="inline-badge python" aria-hidden="true">Py</span>';
-    }
-    if (name === 'flutter') {
-      return '<span class="inline-badge flutter" aria-hidden="true">Fl</span>';
-    }
-    // fallback simple star
-    return starSVG();
-  }
-
-  // Initialize dynamic sections
-  loadPinned();
   loadRepos();
 })();
