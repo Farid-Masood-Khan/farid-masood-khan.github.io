@@ -41,6 +41,22 @@
       "tests": "18 Tests Passing"
     },
     {
+      "title": "Customer-Churn-Prediction",
+      "desc": "Leak-free supervised tabular learning & Streamlit simulator for Telco churn prediction (7,043 accounts). 5-fold CV, 0.843 ROC-AUC, 79.4% recall. Domain foundation to MLForge.",
+      "url": "https://github.com/Farid-Masood-Khan/Customer-Churn-Prediction",
+      "icon": "python",
+      "tag": "Supervised ML",
+      "tests": "10 Tests Passing"
+    },
+    {
+      "title": "Sentiment-Analysis-of-Product-Reviews",
+      "desc": "Dual-script Urdu & Roman Urdu sentiment analysis pipeline: text normalizer, subword n-gram TF-IDF, and script error analysis. Foundational precursor to UrduNLP Toolkit.",
+      "url": "https://github.com/Farid-Masood-Khan/Sentiment-Analysis-of-Product-Reviews",
+      "icon": "python",
+      "tag": "NLP Baseline",
+      "tests": "8 Tests Passing"
+    },
+    {
       "title": "Frugal-ML-Extension",
       "desc": "Food demand forecasting regressor and shelf-life spoilage hazard classifier microservice for the Frugal sustainable food distribution platform.",
       "url": "https://github.com/Farid-Masood-Khan/Frugal-ML-Extension",

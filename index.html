@@ -119,11 +119,11 @@
         <!-- Metrics Ribbon -->
         <div class="metrics-ribbon">
           <div class="metric-card">
-            <div class="metric-val">5</div>
-            <div class="metric-lbl">Production ML Systems</div>
+            <div class="metric-val">7</div>
+            <div class="metric-lbl">Production & Research Systems</div>
           </div>
           <div class="metric-card">
-            <div class="metric-val">91 / 91</div>
+            <div class="metric-val">109 / 109</div>
             <div class="metric-lbl">Tests Passing (100% Green)</div>
           </div>
           <div class="metric-card">
@@ -317,6 +317,60 @@
               <a class="btn small primary" href="https://github.com/Farid-Masood-Khan/Frugal-ML-Extension" target="_blank" rel="noopener">Explore Repository →</a>
             </div>
           </article>
+
+          <!-- 7. Customer Churn Prediction -->
+          <article class="system-card">
+            <div class="card-top">
+              <span class="sys-badge">Supervised Tabular ML</span>
+              <span class="test-pill">10 / 10 Tests Passing</span>
+            </div>
+            <h3 class="sys-title">Customer-Churn-Prediction</h3>
+            <p class="sys-desc">
+              Leak-free supervised ML pipeline & interactive Streamlit simulator developed on the IBM Telco Customer Churn dataset (7,043 accounts). Enforces 5-fold cross-validation, 0.843 ROC-AUC, 79.4% recall, and honest error analysis.
+            </p>
+            <ul class="sys-features">
+              <li><strong>Zero Data Leakage:</strong> ColumnTransformers fit exclusively on training splits.</li>
+              <li><strong>Honest Metrics:</strong> 79.4% recall catching 297/374 churners (0.843 ROC-AUC).</li>
+              <li><strong>Streamlit Simulator:</strong> Real-time customer churn probability & retention actions.</li>
+            </ul>
+            <div class="sys-tags">
+              <span class="tag-chip">Scikit-Learn</span>
+              <span class="tag-chip">Random Forest</span>
+              <span class="tag-chip">Streamlit</span>
+              <span class="tag-chip">Pytest</span>
+              <span class="tag-chip">EDA & Metrics</span>
+            </div>
+            <div class="card-actions">
+              <a class="btn small primary" href="https://github.com/Farid-Masood-Khan/Customer-Churn-Prediction" target="_blank" rel="noopener">Explore Repository →</a>
+            </div>
+          </article>
+
+          <!-- 8. Urdu Sentiment Analysis -->
+          <article class="system-card">
+            <div class="card-top">
+              <span class="sys-badge">Dual-Script Multilingual NLP</span>
+              <span class="test-pill">8 / 8 Tests Passing</span>
+            </div>
+            <h3 class="sys-title">Sentiment-Analysis-of-Product-Reviews</h3>
+            <p class="sys-desc">
+              Foundational dual-script NLP pipeline for low-resource Urdu and Roman Urdu. Features Arabic Unicode diacritic stripping (Aerab), elongation compression, subword n-gram TF-IDF representations, and script error analysis.
+            </p>
+            <ul class="sys-features">
+              <li><strong>Dual-Script Handling:</strong> Automatic Nastaliq vs. Roman Urdu script detection.</li>
+              <li><strong>Subword Morphology:</strong> Character and word n-grams capture informal phonetic variance.</li>
+              <li><strong>Research Lineage:</strong> Foundational prototype that evolved into UrduNLP Toolkit.</li>
+            </ul>
+            <div class="sys-tags">
+              <span class="tag-chip">Urdu NLP</span>
+              <span class="tag-chip">Roman Urdu</span>
+              <span class="tag-chip">Normalization</span>
+              <span class="tag-chip">TF-IDF</span>
+              <span class="tag-chip">Pytest</span>
+            </div>
+            <div class="card-actions">
+              <a class="btn small primary" href="https://github.com/Farid-Masood-Khan/Sentiment-Analysis-of-Product-Reviews" target="_blank" rel="noopener">Explore Repository →</a>
+            </div>
+          </article>
         </div>
 
         <!-- Terminal Widget -->
@@ -338,7 +392,9 @@
             <div>cropguard-agri-ai/tests/test_edge_quantization.py ..... <span class="term-pass">[PASS 17/17]</span></div>
             <div>urdunlp-toolkit/tests/test_normalization_engine.py ... <span class="term-pass">[PASS 18/18]</span></div>
             <div>trendcast-forecasting/tests/test_rolling_backtest.py .. <span class="term-pass">[PASS 18/18]</span></div>
-            <div class="term-summary">======================= 91 passed in 1.42s (100% Green) =======================</div>
+            <div>customer-churn/tests/test_leak_free_pipeline.py ...... <span class="term-pass">[PASS 10/10]</span></div>
+            <div>urdu-sentiment/tests/test_dual_script_normalizer.py .. <span class="term-pass">[PASS 8/8]</span></div>
+            <div class="term-summary">======================= 109 passed in 1.84s (100% Green) =======================</div>
           </div>
         </div>
       </div>
